@@ -3,13 +3,13 @@
 Votifier это плагин Bukkit, целью которого является уведомление (ака votified) при голосовании на мониторинговых топ Minecraft серверов. Votifier создает легкий сервер, который ожидает соединений от серверов мониторинга Minecraft и использует простой протокол, чтобы получить необходимую информацию. Votifier является безопасным, и подтверждает, что все уведомления голосования будут зарегистрированы на Вашем сервере Майнкрафт. Попробуйте Votifier на https://minecraftservers.ru
 
 
-## Configuring Votifier
+## Настройка Votifier
 
-Votifier configures itself the first time it is run.
+Votifier Настраивается сам при первоначальном запуске плагина.
+Если Вы хотите настроить некоторые параметры Votifier, просто отредактируйте `./plugins/votifier/config.yml`.
 
-If you want to customize Votifier, simply the edit `./plugins/votifier/config.yml` file.
 
-## Writing Vote Listeners
+## Создание своего Vote Listeners
 
 A vote listener implements the `VoteListener` interface which contains an implementation of the `voteMade` method.
 
@@ -26,17 +26,17 @@ A basic vote listener looks something like this:
 
     }
 
-## Compiling Vote Listeners
+## Компиляция Vote Listeners
 
-Vote listeners can be compiled by including Votifier in the class path. For example:
+Vote listeners может быть компилирован Votifier в class path. Например:
 
 	javac -cp Votifier.jar FlatfileVoteListener.java
 
-## Encryption
+## Шифрование
 
 Votifier uses one-way RSA encryption to ensure that only a trusted toplist can tell Votifier when a vote has been made.  When it is first run, Votifier will generate a 2048 bit RSA key pair and store the keys in the `./plugins/votifier/rsa` directory.  When you link Votifier with a toplist, the toplist will ask you for your Votifier public key - this is located at `./plugins/votifier/rsa/public.key` and the toplist will use this key to encrypt vote data.  It is essential that you do not share these keys with your players, as a smart player can use the key to create a spoof packet and tell Votifier that they voted when they really didn't.
 
-## Protocol Documentation
+## Описание протокола
 
 This documentation is for server lists that wish to add Votifier support.
 
