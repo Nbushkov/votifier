@@ -105,7 +105,7 @@ public class Votifier extends JavaPlugin {
 		if (!config.exists()) {
 			try {
 				// First time run - do some initialization.
-				LOG.info("Configuring Votifier for the first time...");
+				LOG.info("Первоначальная настройка Votifier ...");
 
 				// Initialize the configuration file.
 				config.createNewFile();
@@ -119,16 +119,16 @@ public class Votifier extends JavaPlugin {
 				 * port number.
 				 */
 				LOG.info("------------------------------------------------------------------------------");
-				LOG.info("Assigning Votifier to listen on port 8192. If you are hosting Craftbukkit on a");
-				LOG.info("shared server please check with your hosting provider to verify that this port");
-				LOG.info("is available for your use. Chances are that your hosting provider will assign");
-				LOG.info("a different port, which you need to specify in config.yml");
+				LOG.info("Votifier работает на порту 8192. Если вы используете не выделенный сервер,");
+				LOG.info("то проверьте доступность этого порта у вашего хостинг провайдера.");
+				LOG.info("Чтобы переназначить на другой порт Вам необходимо отредактировать config.yml");
+				LOG.info(" ");
 				LOG.info("------------------------------------------------------------------------------");
 
 				cfg.set("listener_folder", listenerDirectory);
 				cfg.save(config);
 			} catch (Exception ex) {
-				LOG.log(Level.SEVERE, "Error creating configuration file", ex);
+				LOG.log(Level.SEVERE, "Ошибка создания конфигурационного файла", ex);
 				gracefulExit();
 				return;
 			}
@@ -152,7 +152,7 @@ public class Votifier extends JavaPlugin {
 			}
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE,
-					"Error reading configuration file or RSA keys", ex);
+					"Ошибка чтения конфигурационного файла или RSA ключа", ex);
 			gracefulExit();
 			return;
 		}
@@ -166,13 +166,13 @@ public class Votifier extends JavaPlugin {
 		int port = cfg.getInt("port", 8192);
 		debug = cfg.getBoolean("debug", false);
 		if (debug)
-			LOG.info("DEBUG mode enabled!");
+			LOG.info("DEBUG режим!");
 
 		try {
 			voteReceiver = new VoteReceiver(this, host, port);
 			voteReceiver.start();
 
-			LOG.info("Votifier enabled.");
+			LOG.info("Votifier активирован.");
 		} catch (Exception ex) {
 			gracefulExit();
 			return;
@@ -185,7 +185,7 @@ public class Votifier extends JavaPlugin {
 		if (voteReceiver != null) {
 			voteReceiver.shutdown();
 		}
-		LOG.info("Votifier disabled.");
+		LOG.info("Votifier не активен.");
 	}
 
 	private void gracefulExit() {
